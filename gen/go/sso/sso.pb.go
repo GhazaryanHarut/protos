@@ -179,7 +179,9 @@ func (x *LoginRequest) GetAppId() int32 {
 
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -214,9 +216,402 @@ func (*LoginResponse) Descriptor() ([]byte, []int) {
 	return file_proto_sso_sso_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *LoginResponse) GetToken() string {
+func (x *LoginResponse) GetAccessToken() string {
 	if x != nil {
-		return x.Token
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type RefreshTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenRequest) Reset() {
+	*x = RefreshTokenRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenRequest) ProtoMessage() {}
+
+func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RefreshTokenRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+type RefreshTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenResponse) Reset() {
+	*x = RefreshTokenResponse{}
+	mi := &file_proto_sso_sso_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenResponse) ProtoMessage() {}
+
+func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenResponse.ProtoReflect.Descriptor instead.
+func (*RefreshTokenResponse) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RefreshTokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+// OAuth registration/login общие поля
+type OAuthRegisterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`       // например "google", "github", "facebook"
+	AccessToken   string                 `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"` // токен, полученный от провайдера
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OAuthRegisterRequest) Reset() {
+	*x = OAuthRegisterRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthRegisterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthRegisterRequest) ProtoMessage() {}
+
+func (x *OAuthRegisterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthRegisterRequest.ProtoReflect.Descriptor instead.
+func (*OAuthRegisterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *OAuthRegisterRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *OAuthRegisterRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+type OAuthLoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OAuthLoginRequest) Reset() {
+	*x = OAuthLoginRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OAuthLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OAuthLoginRequest) ProtoMessage() {}
+
+func (x *OAuthLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OAuthLoginRequest.ProtoReflect.Descriptor instead.
+func (*OAuthLoginRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *OAuthLoginRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *OAuthLoginRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+// Специфичные для GitHub
+type GitHubRegisterRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	GithubAccessToken string                 `protobuf:"bytes,1,opt,name=githubAccessToken,proto3" json:"githubAccessToken,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GitHubRegisterRequest) Reset() {
+	*x = GitHubRegisterRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GitHubRegisterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GitHubRegisterRequest) ProtoMessage() {}
+
+func (x *GitHubRegisterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GitHubRegisterRequest.ProtoReflect.Descriptor instead.
+func (*GitHubRegisterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GitHubRegisterRequest) GetGithubAccessToken() string {
+	if x != nil {
+		return x.GithubAccessToken
+	}
+	return ""
+}
+
+type GitHubLoginRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	GithubAccessToken string                 `protobuf:"bytes,1,opt,name=githubAccessToken,proto3" json:"githubAccessToken,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GitHubLoginRequest) Reset() {
+	*x = GitHubLoginRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GitHubLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GitHubLoginRequest) ProtoMessage() {}
+
+func (x *GitHubLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GitHubLoginRequest.ProtoReflect.Descriptor instead.
+func (*GitHubLoginRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GitHubLoginRequest) GetGithubAccessToken() string {
+	if x != nil {
+		return x.GithubAccessToken
+	}
+	return ""
+}
+
+// Специфичные для Facebook
+type FacebookRegisterRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	FacebookAccessToken string                 `protobuf:"bytes,1,opt,name=facebookAccessToken,proto3" json:"facebookAccessToken,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *FacebookRegisterRequest) Reset() {
+	*x = FacebookRegisterRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FacebookRegisterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FacebookRegisterRequest) ProtoMessage() {}
+
+func (x *FacebookRegisterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FacebookRegisterRequest.ProtoReflect.Descriptor instead.
+func (*FacebookRegisterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FacebookRegisterRequest) GetFacebookAccessToken() string {
+	if x != nil {
+		return x.FacebookAccessToken
+	}
+	return ""
+}
+
+type FacebookLoginRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	FacebookAccessToken string                 `protobuf:"bytes,1,opt,name=facebookAccessToken,proto3" json:"facebookAccessToken,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *FacebookLoginRequest) Reset() {
+	*x = FacebookLoginRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FacebookLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FacebookLoginRequest) ProtoMessage() {}
+
+func (x *FacebookLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FacebookLoginRequest.ProtoReflect.Descriptor instead.
+func (*FacebookLoginRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *FacebookLoginRequest) GetFacebookAccessToken() string {
+	if x != nil {
+		return x.FacebookAccessToken
 	}
 	return ""
 }
@@ -234,12 +629,41 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x15\n" +
-	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"%\n" +
-	"\rLoginResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token2s\n" +
+	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"n\n" +
+	"\rLoginResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"9\n" +
+	"\x13RefreshTokenRequest\x12\"\n" +
+	"\frefreshToken\x18\x01 \x01(\tR\frefreshToken\"\\\n" +
+	"\x14RefreshTokenResponse\x12 \n" +
+	"\vaccessToken\x18\x01 \x01(\tR\vaccessToken\x12\"\n" +
+	"\frefreshToken\x18\x02 \x01(\tR\frefreshToken\"T\n" +
+	"\x14OAuthRegisterRequest\x12\x1a\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12 \n" +
+	"\vaccessToken\x18\x02 \x01(\tR\vaccessToken\"Q\n" +
+	"\x11OAuthLoginRequest\x12\x1a\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12 \n" +
+	"\vaccessToken\x18\x02 \x01(\tR\vaccessToken\"E\n" +
+	"\x15GitHubRegisterRequest\x12,\n" +
+	"\x11githubAccessToken\x18\x01 \x01(\tR\x11githubAccessToken\"B\n" +
+	"\x12GitHubLoginRequest\x12,\n" +
+	"\x11githubAccessToken\x18\x01 \x01(\tR\x11githubAccessToken\"K\n" +
+	"\x17FacebookRegisterRequest\x120\n" +
+	"\x13facebookAccessToken\x18\x01 \x01(\tR\x13facebookAccessToken\"H\n" +
+	"\x14FacebookLoginRequest\x120\n" +
+	"\x13facebookAccessToken\x18\x01 \x01(\tR\x13facebookAccessToken2\xcd\x04\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
-	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponseB\fZ\n" +
+	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12E\n" +
+	"\fRefreshToken\x12\x19.auth.RefreshTokenRequest\x1a\x1a.auth.RefreshTokenResponse\x12C\n" +
+	"\rOAuthRegister\x12\x1a.auth.OAuthRegisterRequest\x1a\x16.auth.RegisterResponse\x12E\n" +
+	"\x0eGitHubRegister\x12\x1b.auth.GitHubRegisterRequest\x1a\x16.auth.RegisterResponse\x12I\n" +
+	"\x10FacebookRegister\x12\x1d.auth.FacebookRegisterRequest\x1a\x16.auth.RegisterResponse\x12:\n" +
+	"\n" +
+	"OAuthLogin\x12\x17.auth.OAuthLoginRequest\x1a\x13.auth.LoginResponse\x12<\n" +
+	"\vGitHubLogin\x12\x18.auth.GitHubLoginRequest\x1a\x13.auth.LoginResponse\x12@\n" +
+	"\rFacebookLogin\x12\x1a.auth.FacebookLoginRequest\x1a\x13.auth.LoginResponseB\fZ\n" +
 	"/sso;ssov1b\x06proto3"
 
 var (
@@ -254,23 +678,45 @@ func file_proto_sso_sso_proto_rawDescGZIP() []byte {
 	return file_proto_sso_sso_proto_rawDescData
 }
 
-var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_proto_sso_sso_proto_goTypes = []any{
-	(*RegisterRequest)(nil),  // 0: auth.RegisterRequest
-	(*RegisterResponse)(nil), // 1: auth.RegisterResponse
-	(*LoginRequest)(nil),     // 2: auth.LoginRequest
-	(*LoginResponse)(nil),    // 3: auth.LoginResponse
+	(*RegisterRequest)(nil),         // 0: auth.RegisterRequest
+	(*RegisterResponse)(nil),        // 1: auth.RegisterResponse
+	(*LoginRequest)(nil),            // 2: auth.LoginRequest
+	(*LoginResponse)(nil),           // 3: auth.LoginResponse
+	(*RefreshTokenRequest)(nil),     // 4: auth.RefreshTokenRequest
+	(*RefreshTokenResponse)(nil),    // 5: auth.RefreshTokenResponse
+	(*OAuthRegisterRequest)(nil),    // 6: auth.OAuthRegisterRequest
+	(*OAuthLoginRequest)(nil),       // 7: auth.OAuthLoginRequest
+	(*GitHubRegisterRequest)(nil),   // 8: auth.GitHubRegisterRequest
+	(*GitHubLoginRequest)(nil),      // 9: auth.GitHubLoginRequest
+	(*FacebookRegisterRequest)(nil), // 10: auth.FacebookRegisterRequest
+	(*FacebookLoginRequest)(nil),    // 11: auth.FacebookLoginRequest
 }
 var file_proto_sso_sso_proto_depIdxs = []int32{
-	0, // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
-	2, // 1: auth.Auth.Login:input_type -> auth.LoginRequest
-	1, // 2: auth.Auth.Register:output_type -> auth.RegisterResponse
-	3, // 3: auth.Auth.Login:output_type -> auth.LoginResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
+	2,  // 1: auth.Auth.Login:input_type -> auth.LoginRequest
+	4,  // 2: auth.Auth.RefreshToken:input_type -> auth.RefreshTokenRequest
+	6,  // 3: auth.Auth.OAuthRegister:input_type -> auth.OAuthRegisterRequest
+	8,  // 4: auth.Auth.GitHubRegister:input_type -> auth.GitHubRegisterRequest
+	10, // 5: auth.Auth.FacebookRegister:input_type -> auth.FacebookRegisterRequest
+	7,  // 6: auth.Auth.OAuthLogin:input_type -> auth.OAuthLoginRequest
+	9,  // 7: auth.Auth.GitHubLogin:input_type -> auth.GitHubLoginRequest
+	11, // 8: auth.Auth.FacebookLogin:input_type -> auth.FacebookLoginRequest
+	1,  // 9: auth.Auth.Register:output_type -> auth.RegisterResponse
+	3,  // 10: auth.Auth.Login:output_type -> auth.LoginResponse
+	5,  // 11: auth.Auth.RefreshToken:output_type -> auth.RefreshTokenResponse
+	1,  // 12: auth.Auth.OAuthRegister:output_type -> auth.RegisterResponse
+	1,  // 13: auth.Auth.GitHubRegister:output_type -> auth.RegisterResponse
+	1,  // 14: auth.Auth.FacebookRegister:output_type -> auth.RegisterResponse
+	3,  // 15: auth.Auth.OAuthLogin:output_type -> auth.LoginResponse
+	3,  // 16: auth.Auth.GitHubLogin:output_type -> auth.LoginResponse
+	3,  // 17: auth.Auth.FacebookLogin:output_type -> auth.LoginResponse
+	9,  // [9:18] is the sub-list for method output_type
+	0,  // [0:9] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_sso_sso_proto_init() }
@@ -284,7 +730,7 @@ func file_proto_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_sso_sso_proto_rawDesc), len(file_proto_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

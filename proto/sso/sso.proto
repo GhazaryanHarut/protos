@@ -7,19 +7,72 @@ option go_package = "/sso;ssov1";
 service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
+    rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+
+    rpc OAuthRegister (OAuthRegisterRequest) returns (RegisterResponse);
+    rpc GitHubRegister (GitHubRegisterRequest) returns (RegisterResponse);
+    rpc FacebookRegister (FacebookRegisterRequest) returns (RegisterResponse);
+
+    rpc OAuthLogin (OAuthLoginRequest) returns (LoginResponse);
+    rpc GitHubLogin (GitHubLoginRequest) returns (LoginResponse);
+    rpc FacebookLogin (FacebookLoginRequest) returns (LoginResponse);
 }
+
 message RegisterRequest {
     string email = 1;
     string password = 2;
 }
+
 message RegisterResponse {
     int64 user_id = 1;
 }
-message LoginRequest{
+
+message LoginRequest {
     string email = 1;
     string password = 2;
     int32 app_id = 3;
 }
-message LoginResponse{
-    string token = 1;
+
+message LoginResponse {
+    string accessToken = 1;
+    string refreshToken = 2;
+    int64 user_id = 3;
+}
+
+message RefreshTokenRequest {
+    string refreshToken = 1;
+}
+
+message RefreshTokenResponse {
+    string accessToken = 1;
+    string refreshToken = 2;
+}
+
+// OAuth registration/login общие поля
+message OAuthRegisterRequest {
+    string provider = 1; // например "google", "github", "facebook"
+    string accessToken = 2; // токен, полученный от провайдера
+}
+
+message OAuthLoginRequest {
+    string provider = 1;
+    string accessToken = 2;
+}
+
+// Специфичные для GitHub
+message GitHubRegisterRequest {
+    string githubAccessToken = 1;
+}
+
+message GitHubLoginRequest {
+    string githubAccessToken = 1;
+}
+
+// Специфичные для Facebook
+message FacebookRegisterRequest {
+    string facebookAccessToken = 1;
+}
+
+message FacebookLoginRequest {
+    string facebookAccessToken = 1;
 }
